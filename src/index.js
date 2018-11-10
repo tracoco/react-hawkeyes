@@ -1,12 +1,17 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import React from "react";
+import ReactDOM from "react-dom";
+import { Hawkeyes } from './lib';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import demo from './demo';
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: http://bit.ly/CRA-PWA
-serviceWorker.unregister();
+ReactDOM.render(<Hawkeyes data={demo} />, document.getElementById("root"));
+setInterval(function() {
+    demo.graph[2].value = Object.assign({}, demo.graph[2].value);
+    demo.graph[2].value.out = Math.floor(Math.random()*400);
+    demo.graph[2].value.status = Math.random()>0.5?"healthy":"unhealthy";
+    demo.graph[7].value = Object.assign({}, demo.graph[7].value);
+    demo.graph[7].value.in = Math.floor(Math.random()*400);
+    ReactDOM.render(<Hawkeyes data={demo} />, document.getElementById("root"));
+}, 1000);
+
+
